@@ -1,0 +1,30 @@
+<link rel="import" href="/lib/polymer/polymer.html">
+<link rel="import" href="/lib/font-roboto/roboto.html">
+
+<polymer-element name="my-avatar" attributes="fullname profilepic narrow">
+    <template>
+        <style>
+            .avatar .image-small {
+                background-size: 32px 32px;
+                border-radius: 50%;
+                display: block;
+                margin: -1px;
+                height: 32px;
+                width: 32px;
+            }
+            .avatar .image-large {
+                height: 96px !important;
+                width: 96px !important;
+                margin-top: 60px;
+            }
+        </style>
+        <div class="avatar">
+            <img class="{{ {'image-small' : narrow, 'image-large' : !narrow} | tokenList }}" src="/modules/core/img/avatar.jpg"/>
+        </div>
+    </template>
+    <script>
+        Polymer('my-avatar', {
+
+        });
+    </script>
+</polymer-element>

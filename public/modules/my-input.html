@@ -1,0 +1,23 @@
+<link rel="import" href="/lib/polymer/polymer.html">
+<link rel="import" href="/lib/font-roboto/roboto.html">
+
+<link rel="import" href="/lib/paper-input/paper-input.html">
+
+<polymer-element name="my-input" attributes="value type label">
+    <template>
+        <style>
+            paper-input {
+                width: 100px;
+            }
+        </style>
+        <paper-input type="{{type}}" value="{{value}}" floatingLabel label="{{label}}" flex></paper-input>
+    </template>
+    <script>
+        Polymer('my-input', {
+
+            publish: {
+                value: {value: '', reflect: true}
+            }
+        });
+    </script>
+</polymer-element>

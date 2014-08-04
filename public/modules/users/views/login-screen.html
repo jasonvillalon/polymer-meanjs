@@ -1,0 +1,99 @@
+<link rel="import" href="/lib/polymer/polymer.html">
+<link rel="import" href="/lib/font-roboto/roboto.html">
+
+<link rel="import" href="/lib/core-toolbar/core-toolbar.html">
+
+<link rel="import" href="/lib/paper-shadow/paper-shadow.html">
+<link rel="import" href="/lib/paper-button/paper-button.html">
+
+<link rel="import" href="/modules/my-input.html" />
+
+<polymer-element name="login-screen" attributes="username password submitted">
+    <template>
+        <style>
+            :host {
+                font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+            }
+
+            core-toolbar {
+                background-color: #fff;
+                color: #fff;
+            }
+
+            .login {
+                position: absolute;
+                display: block;
+                right: 100px;
+                padding: 5px;
+                font-size: 10px;
+            }
+
+            .register {
+                display: block;
+            }
+
+            paper-button {
+                margin: 1em;
+                width: 10em;
+            }
+
+            paper-button.colored {
+                color: #4285f4;
+                fill: #4285f4;
+            }
+
+            paper-button[raisedButton].colored {
+                background: #4285f4;
+                color: #fff;
+            }
+
+            paper-button[raisedButton].colored #ripple,
+            paper-button[raisedButton].colored::shadow #ripple {
+                color: #2a56c6;
+            }
+
+            paper-button[raisedButton].colored #focusBg,
+            paper-button[raisedButton].colored::shadow #focusBg {
+                background: #3367d6;
+            }
+        </style>
+        <core-toolbar responsiveWidth="600px" class="{{ {'medium-tall' : !narrow} | tokenList }}">
+            <div class="login">
+                <paper-shadow z="5"></paper-shadow>{{submitted}}
+                <my-input type="text" id="username" name="username" value="{{uname}}" label="Username"></my-input>
+                <my-input type="password" id="password" name="password" value="{{pwd}}" label="Password"></my-input>
+                <br/>
+                <paper-button on-tap="{{signin}}" label="Sign in" raisedButton class="colored"></paper-button>
+                <paper-button label="Signup" raisedButton class="colored" link="/#!/signup" on-tap="{{goLink}}"></paper-button>
+            </div>
+        </core-toolbar>
+        <!--<div class="register">-->
+
+        <!--<paper-shadow z="5"></paper-shadow>-->
+        <content></content>
+        <!--</div>-->
+    </template>
+    <script>
+        Polymer('login-screen', {
+            ready: function(){
+            },
+            signin: function(){
+                var _this = this;
+                _this.username = this.uname;
+                _this.password = this.pwd;
+                _this.submitted = 'true';
+                setTimeout(function(){
+                    _this.submitted = '';
+                },1)
+            },
+            publish: {
+                username: {value: '', reflect: true},
+                password: {value: '', reflect: true},
+                submitted: {value: '', reflect: true}
+            },
+            goLink: function(e){
+                window.location.href = e.target.getAttribute('link');
+            }
+        });
+    </script>
+</polymer-element>
