@@ -1,0 +1,4 @@
+polymer-meanjs
+==============
+
+sample project
